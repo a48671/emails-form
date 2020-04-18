@@ -9,13 +9,13 @@ interface IEmailsFieldAPI {
 
 declare global {
     interface Window {
-        EmailsInput: (wrapper: HTMLElement) => IEmailsFieldAPI | null;
+        EmailsInput: (wrapper: HTMLElement, emails: string[]) => IEmailsFieldAPI | null;
     }
 }
 
-window.EmailsInput = (wrapper: HTMLElement): IEmailsFieldAPI | null => {
+window.EmailsInput = (wrapper: HTMLElement, emails: string[]): IEmailsFieldAPI | null => {
     if (!wrapper) return null;
-    const emailsField = new EmailsField(wrapper);
+    const emailsField = new EmailsField(wrapper, emails);
     return ({
         addMail: emailsField.addMail,
         getEmailsCount: emailsField.getEmailsCount

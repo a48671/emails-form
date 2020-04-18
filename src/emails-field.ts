@@ -5,8 +5,9 @@ import shortid from "shortid";
 
 class EmailsField {
     state: IEmailOption[];
-    constructor(private wrapper: HTMLElement) {
+    constructor(private wrapper: HTMLElement, private emails: string[] = []) {
         this.state = [];
+        this.addEmailsListToState(emails);
         if (!this.wrapper) return;
         const keyUpHandler = (event: KeyboardEvent): void => {
             const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
@@ -65,6 +66,9 @@ class EmailsField {
             field.scrollTop = field.scrollHeight
         }
     };
+    private addEmailsListToState = (emails: string[] = []): void => {
+        emails.forEach(email => this.state.push({email, valid: validateEmail(email)}));
+    }
     public addMail = () => {
         this.addEmailInState(`${shortid.generate()}@gmail.com`);
         this.render();
