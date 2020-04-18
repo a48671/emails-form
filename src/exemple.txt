@@ -39,3 +39,35 @@ class EmailsInput {
 
   }
 }
+
+const addEmailInState = (email: string, focus: boolean = true): void => {
+        state.push({email, valid: validateEmail(email)});
+        render();
+        if (focus) focusingOnInput();
+    };
+    const removeEmailFromState = (emailElement: HTMLElement): void => {
+        const fieldContainer: HTMLElement = inputContainerNode.querySelector('.emails-field__container') as HTMLElement;
+        const allBlocks: HTMLElement[] = Array.prototype.slice.call(fieldContainer.children);
+        const targetBlockIndex = allBlocks.indexOf(emailElement);
+        state.splice(targetBlockIndex, 1);
+        render();
+    };
+    const focusingOnInput = (): void => {
+        const input: HTMLInputElement = inputContainerNode.getElementsByTagName('input')[0];
+        if (input) {
+            input.focus();
+        }
+    };
+    const render = (): void => {
+        inputContainerNode.innerHTML = '';
+        inputContainerNode.append(createField(state));
+        const field: HTMLElement | null = inputContainerNode.querySelector('.emails-field');
+        if (field) {
+            field.scrollTop = field.scrollHeight
+        }
+    };
+    render();
+    return ({
+        addMail: () => alert('addMail'),
+        getEmailsCount: () => alert('getEmailsCount')
+    })
