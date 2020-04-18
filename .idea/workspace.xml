@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d3075833-ea98-4c36-bb19-f9ab8d2db943" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exemple.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/exemple.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/components/buttons/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/components/buttons/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global/index.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587123119933</updated>
       <workItem from="1587123122080" duration="19016000" />
-      <workItem from="1587184625696" duration="16441000" />
+      <workItem from="1587184625696" duration="21789000" />
     </task>
     <servers />
   </component>
