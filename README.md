@@ -1,22 +1,22 @@
-##Start demonstration
+## Start demonstration
 >npm run start
 ___
 
-##Implementing form
-####EmailsInput(wrapper[, emails])
+## Implementing form
+#### EmailsInput(wrapper[, emails])
 Argument | Type | Default value
 --- | --- | ---
 wrapper | HTMLElement | null
 emails | Array of strings | []
 
-####Function EmailsInput return obgect:
+#### Function EmailsInput return obgect:
 Methods | Description 
  --- | --- 
  addMail() | random email to the list
  getEmailsCount() | shows an alert with valid emails count
 ___
 
-##Example
+## Example
 ```dart in html
 <div id="emails-input"></div>
 
