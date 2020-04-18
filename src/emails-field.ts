@@ -37,7 +37,7 @@ class EmailsField {
                 this.removeEmailFromState(targetBlock);
                 this.render();
             }
-            if (targetElement.classList.contains('emails-field')) {
+            if (targetElement === this.wrapper.querySelector('.emails-field')) {
                 input.focus();
             }
         });
