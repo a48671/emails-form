@@ -1,0 +1,41 @@
+class EmailsInput {
+  constructor() {
+    // Add event listeners
+    const emailTextArea // We somehow got it
+    emailTextArea.onChange(() => {
+      // get the string without HTML elements / filter out HTML
+      const stringContent: string = "iasohetaisohtn"
+      const lexems = stringContent.split(',')
+      const highlightedEmailsLexems = lexems.map(item => {
+        const isEmail = item.match(/emailregexp/)
+        if(email){
+          return `<span >${item}</span>`;
+        } else {
+          item
+        }
+      })
+      render(highlightedEmailsLexems)
+    })
+
+  }
+
+  private render = () => {
+
+  }
+
+  private addEmalToState = () => {
+    // modify data
+  }
+
+  private removeEmalToState = () => {
+    // modify data
+  }
+
+  public addEmail = () = {
+
+  }
+
+  public getEmailsCount = () = {
+
+  }
+}
