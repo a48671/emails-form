@@ -1,4 +1,4 @@
 export interface IEmailOption {
-    email: string;
+    value: string;
     valid: boolean;
 }

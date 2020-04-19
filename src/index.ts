@@ -1,10 +1,14 @@
 import './styles/index.scss';
 
 import EmailsField from './emails-field';
+import { IEmailOption } from "./types";
 
 interface IEmailsFieldAPI {
-    addMail: () => void;
+    addRandomMail: () => void;
     getEmailsCount: () => void;
+    getAllAddedEmails: () => void;
+    replaceAllEmails: (emails: string[]) => void;
+    subscribe: (callback: () => void) => void;
 }
 
 declare global {
@@ -17,7 +21,10 @@ window.EmailsInput = (wrapper: HTMLElement, emails: string[]): IEmailsFieldAPI |
     if (!wrapper) return null;
     const emailsField = new EmailsField(wrapper, emails);
     return ({
-        addMail: emailsField.addMail,
-        getEmailsCount: emailsField.getEmailsCount
+        addRandomMail: emailsField.addRandomMail,
+        getEmailsCount: emailsField.getEmailsCount,
+        getAllAddedEmails: emailsField.getAllAddedEmails,
+        replaceAllEmails: emailsField.replaceAllEmails,
+        subscribe: emailsField.subscribe
     });
 }

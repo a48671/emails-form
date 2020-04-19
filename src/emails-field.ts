@@ -2,80 +2,106 @@ import { IEmailOption } from "./types";
 import { validateEmail } from "./utils/validateEmail";
 import { createField } from "./components/createField";
 import shortid from "shortid";
+import { createEmailBlock } from "./components/createEmaileBlock";
 
 class EmailsField {
     state: IEmailOption[];
+    input: HTMLInputElement;
+    field: HTMLDivElement;
+    fieldContainer: HTMLDivElement;
+    listeners: ((state: IEmailOption[]) => void)[];
     constructor(private wrapper: HTMLElement, private emails: string[] = []) {
         this.state = [];
         this.addEmailsListToState(emails);
-        if (!this.wrapper) return;
+        // mount emails field in wrapper
+        if (this.wrapper.children.length) this.wrapper.innerHTML = '';
+        this.wrapper.append(createField(this.state));
+        this.listeners = [];
+        // declaration of the necessary nodes
+        this.field = this.wrapper.querySelector('.emails-field') as HTMLDivElement;
+        this.fieldContainer = this.wrapper.querySelector('.emails-field__container') as HTMLDivElement;
+        this.input = this.wrapper.getElementsByTagName('input')[0];
+        // listeners
         document.addEventListener('keydown', (event: KeyboardEvent): void => {
-            const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
-            if (!input.value.length) return;
-            if (event.code === 'Enter' && input && input.value.length) {
-                this.addEmailInState(input.value);
-                this.render();
-                this.focusingOnInput();
+            if (!this.input.value.length) return;
+            if (event.code === 'Enter' && this.input && this.input.value.length) {
+                this.addEmail(this.input.value);
+                this.callListeners();
             }
-            if (input === document.activeElement && (event.code === 'Comma' || event.code === 'Slash')) {
+            if (this.input === document.activeElement && (event.code === 'Comma' || event.code === 'Slash')) {
                 event.preventDefault();
-                this.addEmailInState(input.value.split(',').join(''));
-                this.render();
-                this.focusingOnInput();
+                const withoutCommaEmail: string = this.input.value.split(',').join('');
+                this.addEmail(withoutCommaEmail);
+                this.callListeners();
             }
         });
         document.addEventListener('click', (event: Event): void => {
-            const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
             const targetElement = event.target as HTMLElement;
-            if (targetElement!== input && input.value.length) {
-                this.addEmailInState(input.value);
-                this.render();
+            if (targetElement!== this.input && this.input.value.length) {
+                this.addEmail(this.input.value);
+                this.callListeners();
             }
             if (targetElement && this.wrapper.contains(targetElement) && targetElement.dataset.role === 'remove') {
                 const targetBlock: HTMLElement = targetElement.parentNode as HTMLElement;
-                this.removeEmailFromState(targetBlock);
-                this.render();
+                this.removeEmail(targetBlock);
+                this.callListeners();
             }
-            if (targetElement === this.wrapper.querySelector('.emails-field')) {
-                input.focus();
+            if (targetElement === this.field || targetElement === this.fieldContainer) {
+                this.input.focus();
             }
         });
-        this.render();
-    }
-    private addEmailInState = (email: string): void => {
-        this.state.push({email, valid: validateEmail(email)});
+        this.listeners = [];
     };
-    private removeEmailFromState = (emailElement: HTMLElement): void => {
-        const fieldContainer: HTMLElement = this.wrapper.querySelector('.emails-field__container') as HTMLElement;
-        const allBlocks: HTMLElement[] = Array.prototype.slice.call(fieldContainer.children);
+    private callListeners = () => this.listeners.forEach(listener => listener(this.state));
+    private addEmail = (email: string) => {
+        this.addEmailInState(email);
+        this.addEmailInField(this.state[this.state.length - 1]);
+        this.input.value = '';
+    };
+    private addEmailInState = (email: string): void => {
+        this.state.push({value: email, valid: validateEmail(email)});
+    };
+    private addEmailInField = (email: IEmailOption) => {
+        const emailElement = createEmailBlock(email);
+        this.input.before(emailElement);
+        if (this.field.scrollTop <  this.field.scrollHeight) {
+            this.field.scrollTop = this.field.scrollHeight
+        }
+    }
+    private removeEmail = (emailElement: HTMLElement): void => {
+        const allBlocks: HTMLElement[] = Array.prototype.slice.call(this.fieldContainer.children);
         const targetBlockIndex = allBlocks.indexOf(emailElement);
         this.state.splice(targetBlockIndex, 1);
-    };
-    private focusingOnInput = (): void => {
-        const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
-        if (input) {
-            input.focus();
-        }
-    };
-    private render = (): void => {
-        this.wrapper.innerHTML = '';
-        this.wrapper.append(createField(this.state));
-        const field: HTMLElement | null = this.wrapper.querySelector('.emails-field');
-        if (field) {
-            field.scrollTop = field.scrollHeight
-        }
+        this.fieldContainer.removeChild(emailElement);
     };
     private addEmailsListToState = (emails: string[] = []): void => {
-        emails.forEach(email => this.state.push({email, valid: validateEmail(email)}));
+        emails.forEach(email => this.state.push({value: email, valid: validateEmail(email)}));
     }
-    public addMail = () => {
-        this.addEmailInState(`${shortid.generate()}@ya.ru`);
-        this.render();
+    public addRandomMail = () => {
+        this.addEmail(`${shortid.generate()}@ya.ru`);
+        this.callListeners();
     };
     public getEmailsCount = () => {
         const validEmailsCount: number = this.state.filter(email => email.valid).length;
         alert(`${validEmailsCount} valid emails`)
     };
+    public getAllAddedEmails = (): string[] => this.state.map(email => email.value)
+    public replaceAllEmails = (emails: string[]): void => {
+        const emailBlocks = this.fieldContainer.querySelectorAll('.emails-field__added');
+        if (emailBlocks && emailBlocks.length) {
+            // tslint:disable-next-line
+            for (let index = 0; index < emailBlocks.length; index++) {
+                const currentEmailBlock: HTMLElement = emailBlocks[index] as HTMLElement;
+                this.removeEmail(currentEmailBlock);
+            }
+        }
+        this.state = [];
+        emails.map(email => this.addEmail(email));
+        this.callListeners();
+    };
+    public subscribe = (callback: () => void): void => {
+        this.listeners.push(callback);
+    }
 }
 
 export default EmailsField;
