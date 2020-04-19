@@ -9,7 +9,7 @@ class EmailsField {
         this.state = [];
         this.addEmailsListToState(emails);
         if (!this.wrapper) return;
-        const keyUpHandler = (event: KeyboardEvent): void => {
+        document.addEventListener('keydown', (event: KeyboardEvent): void => {
             const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
             if (!input.value.length) return;
             if (event.code === 'Enter' && input && input.value.length) {
@@ -23,16 +23,15 @@ class EmailsField {
                 this.render();
                 this.focusingOnInput();
             }
-        };
-        document.addEventListener('keydown', keyUpHandler);
+        });
         document.addEventListener('click', (event: Event): void => {
             const input: HTMLInputElement = this.wrapper.getElementsByTagName('input')[0];
             const targetElement = event.target as HTMLElement;
             if (targetElement!== input && input.value.length) {
-                this.addEmailInState(input.value, false);
+                this.addEmailInState(input.value);
                 this.render();
             }
-            if (targetElement && this.wrapper.contains(targetElement) && targetElement.tagName === 'SPAN') {
+            if (targetElement && this.wrapper.contains(targetElement) && targetElement.dataset.role === 'remove') {
                 const targetBlock: HTMLElement = targetElement.parentNode as HTMLElement;
                 this.removeEmailFromState(targetBlock);
                 this.render();
@@ -43,7 +42,7 @@ class EmailsField {
         });
         this.render();
     }
-    private addEmailInState = (email: string, focus: boolean = true): void => {
+    private addEmailInState = (email: string): void => {
         this.state.push({email, valid: validateEmail(email)});
     };
     private removeEmailFromState = (emailElement: HTMLElement): void => {
@@ -70,7 +69,7 @@ class EmailsField {
         emails.forEach(email => this.state.push({email, valid: validateEmail(email)}));
     }
     public addMail = () => {
-        this.addEmailInState(`${shortid.generate()}@gmail.com`);
+        this.addEmailInState(`${shortid.generate()}@ya.ru`);
         this.render();
     };
     public getEmailsCount = () => {

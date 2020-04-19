@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
 
     <script>
         var inputContainerNode = document.querySelector('#emails-input');
-        var emailsInput = EmailsInput(inputContainerNode);
+        var emailsInput = EmailsInput(inputContainerNode, ['john@miro.com', 'invalid.email', 'mike@miro.com', 'alexander@miro.com']);
         var control = document.querySelector('#share-control');
         control.addEventListener('click', function (event) {
             if (event.target.id === 'add-email') {

@@ -27,44 +27,45 @@
   color: #050038;
   padding: 0 24px 0 10px;
   margin: 0 8px 4px 0;
-  span {
-    display: block;
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    top: 0;
-    left: auto;
-    bottom: 0;
-    right: 8px;
-    margin: auto;
-    transform: rotate(45deg);
-    cursor: pointer;
-    &:after, &:before {
-      display: block;
-      position: absolute;
-      content: '';
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      margin: auto;
-      width: 1px;
-      height: 100%;
-      background: #050038;
-    }
-    &:before {
-      width: 100%;
-      height: 1px;
-    }
-  }
   &.invalid {
     background: transparent;
     padding: 0 16px 0 0;
     border-bottom: 1px dashed #D92929;
     border-radius: 0;
-    span {
+    .emails-field__remove {
       right: 0;
     }
+  }
+}
+
+.emails-field__remove {
+  display: block;
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  top: 0;
+  left: auto;
+  bottom: 0;
+  right: 8px;
+  margin: auto;
+  transform: rotate(45deg);
+  cursor: pointer;
+  &:after, &:before {
+    display: block;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 1px;
+    height: 100%;
+    background: #050038;
+  }
+  &:before {
+    width: 100%;
+    height: 1px;
   }
 }
 
