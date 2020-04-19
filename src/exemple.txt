@@ -60,7 +60,7 @@ const addEmailInState = (email: string, focus: boolean = true): void => {
     };
     const render = (): void => {
         inputContainerNode.innerHTML = '';
-        inputContainerNode.append(createField(state));
+        inputContainerNode.appendChild(createField(state));
         const field: HTMLElement | null = inputContainerNode.querySelector('.emails-field');
         if (field) {
             field.scrollTop = field.scrollHeight

@@ -1,14 +1,7 @@
 import './styles/index.scss';
 
 import EmailsField from './emails-field';
-
-interface IEmailsFieldAPI {
-    addRandomMail: () => void;
-    getEmailsCount: () => void;
-    getAllAddedEmails: () => void;
-    replaceAllEmails: (emails: string[]) => void;
-    subscribe: (callback: () => void) => void;
-}
+import { IEmailsFieldAPI } from './types';
 
 declare global {
     interface Window {

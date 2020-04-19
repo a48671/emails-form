@@ -16,8 +16,8 @@ export const createField = (options: IEmailOption[]): HTMLElement => {
     const fieldContainer: HTMLElement = createElement({
         className: 'emails-field__container'
     });
-    emailBlocks.forEach(block => fieldContainer.append(block));
-    fieldContainer.append(input);
+    emailBlocks.forEach(block => fieldContainer.appendChild(block));
+    fieldContainer.appendChild(input);
     // create main field
     const fieldElement: HTMLElement = createElement({
         className: 'emails-field',

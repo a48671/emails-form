@@ -12,7 +12,7 @@ export const createElement = (options: ICreateElementOptions): HTMLElement => {
     }
     if (content) {
         if (typeof content === "object") {
-            element.append(content);
+            element.appendChild(content);
         } else {
             element.innerHTML = content;
         }

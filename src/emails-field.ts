@@ -15,7 +15,7 @@ class EmailsField {
         this.addEmailsListToState(emails);
         // mount emails field in wrapper
         if (this.wrapper.children.length) this.wrapper.innerHTML = '';
-        this.wrapper.append(createField(this.state));
+        this.wrapper.appendChild(createField(this.state));
         this.listeners = [];
         // declaration of the necessary nodes
         this.field = this.wrapper.querySelector('.emails-field') as HTMLDivElement;
