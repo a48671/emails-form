@@ -1,7 +1,6 @@
 import './styles/index.scss';
 
 import EmailsField from './emails-field';
-import { IEmailOption } from "./types";
 
 interface IEmailsFieldAPI {
     addRandomMail: () => void;

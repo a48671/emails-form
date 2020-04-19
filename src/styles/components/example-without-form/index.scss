@@ -1,0 +1,29 @@
+.example-without-form {
+  margin-top: 100px;
+  width: calc(100% - 20px);
+  max-width: 750px;
+}
+
+.example-without-form__title {
+  font-size: 20px;
+  text-align: center;
+  font-family: "Open Sans";
+  margin-bottom: 20px;
+}
+
+#example-without-form {
+  height: 120px;
+}
+
+#example-without-form__replace {
+  display: block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  font-family: "Open Sans";
+  font-size: 16px;
+  background-color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+}
