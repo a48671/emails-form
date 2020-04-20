@@ -4,7 +4,7 @@ export interface IEmailOption {
 }
 
 export interface IEmailsFieldAPI {
-    addRandomMail: () => void;
+    addEmail: (email: string) => void;
     getEmailsCount: () => void;
     getAllAddedEmails: () => void;
     replaceAllEmails: (emails: string[]) => void;

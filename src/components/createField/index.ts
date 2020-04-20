@@ -11,7 +11,7 @@ export const createField = (options: IEmailOption[]): HTMLElement => {
         className: 'emails-field__input'
     }) as HTMLInputElement;
     input.placeholder = 'add more people…';
-    input.type = 'email';
+    input.type = 'text';
     // create container for email blocks and input
     const fieldContainer: HTMLElement = createElement({
         className: 'emails-field__container'

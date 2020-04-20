@@ -12,7 +12,7 @@ emails | Array of strings | []
 #### Function EmailsInput return obgect:
 Methods | Description 
  --- | --- 
- addRandomMail() | add random email to the list
+ addEmail() | add email to the list
  getEmailsCount() | shows an alert with valid emails count
  subscribe() | accepts a function that is called during the update, receiving state as an argument
  replaceAllEmails | replace all entered emails with new ones

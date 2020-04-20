@@ -37,7 +37,15 @@
         var control = document.querySelector('#share-control');
         control.addEventListener('click', function (event) {
             if (event.target.id === 'add-email') {
-                emailsInput.addRandomMail();
+                var randomEmail = '';
+                var words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+                var max_position = words.length - 1;
+                for(var i = 0; i < 5; ++i ) {
+                    var position = Math.floor ( Math.random() * max_position );
+                    randomEmail = randomEmail + words.substring(position, position + 1);
+                }
+                randomEmail = randomEmail + '@ya.ru';
+                emailsInput.addEmail(randomEmail);
             }
             if (event.target.id === 'get-emails-count') {
                 emailsInput.getEmailsCount();

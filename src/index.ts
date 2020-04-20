@@ -13,7 +13,7 @@ window.EmailsInput = (wrapper: HTMLElement, emails: string[]): IEmailsFieldAPI |
     if (!wrapper) return null;
     const emailsField = new EmailsField(wrapper, emails);
     return ({
-        addRandomMail: emailsField.addRandomMail,
+        addEmail: emailsField.addEmailOutside,
         getEmailsCount: emailsField.getEmailsCount,
         getAllAddedEmails: emailsField.getAllAddedEmails,
         replaceAllEmails: emailsField.replaceAllEmails,

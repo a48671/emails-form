@@ -1,7 +1,6 @@
 import { IEmailOption } from "./types";
 import { validateEmail } from "./utils/validateEmail";
 import { createField } from "./components/createField";
-import shortid from "shortid";
 import { createEmailBlock } from "./components/createEmaileBlock";
 
 class EmailsField {
@@ -24,17 +23,17 @@ class EmailsField {
         // listeners
         document.addEventListener('keydown', (event: KeyboardEvent): void => {
             if (!this.input.value.length) return;
-            if (event.code === 'Enter' && this.input && this.input.value.length) {
+            if (event.keyCode === 13 && this.input && this.input.value.length) {
                 this.addEmail(this.input.value);
                 this.callListeners();
             }
-            if (this.input === document.activeElement && (event.code === 'Comma' || event.code === 'Slash')) {
+            if (this.input === document.activeElement && (event.keyCode === 188 || event.keyCode === 191)) {
                 event.preventDefault();
                 const withoutCommaEmail: string = this.input.value.split(',').join('');
                 this.addEmail(withoutCommaEmail);
                 this.callListeners();
             }
-        });
+        }, true);
         document.addEventListener('click', (event: Event): void => {
             const targetElement = event.target as HTMLElement;
             if (targetElement!== this.input && this.input.value.length) {
@@ -63,7 +62,7 @@ class EmailsField {
     };
     private addEmailInField = (email: IEmailOption) => {
         const emailElement = createEmailBlock(email);
-        this.input.before(emailElement);
+        this.fieldContainer.insertBefore(emailElement, this.input);
         if (this.field.scrollTop <  this.field.scrollHeight) {
             this.field.scrollTop = this.field.scrollHeight
         }
@@ -77,8 +76,8 @@ class EmailsField {
     private addEmailsListToState = (emails: string[] = []): void => {
         emails.forEach(email => this.state.push({value: email, valid: validateEmail(email)}));
     }
-    public addRandomMail = () => {
-        this.addEmail(`${shortid.generate()}@ya.ru`);
+    public addEmailOutside = (email: string) => {
+        this.addEmail(email);
         this.callListeners();
     };
     public getEmailsCount = () => {
